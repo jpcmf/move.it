@@ -28,7 +28,7 @@ yarn start
 
 # :man_technologist: About the author
 
-<img src="https://avatars.githubusercontent.com/u/1216136?s=460&u=6cd0d881545456467074bdd24e3032566f8a36c2&v=4" width="100px;" alt="avatar"/>
+<img src="https://github.com/jpcmf.png" width="100px;" alt="avatar"/>
 
 :wolf:&nbsp; Find me!
 
