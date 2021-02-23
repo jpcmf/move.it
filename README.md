@@ -14,7 +14,7 @@ The project requires [Node.js](https://nodejs.org/) to run locally.
 
 # :computer: Front end
 
-After cloning the repository, go to the folder named `move.it` and install all the dependencies `yarn install` required and run the project by using the command `yarn dev`.
+After cloning the repository, go to the folder named `move.it` and install all the dependencies required using the command `yarn install` and run the project by using the command `yarn dev`.
 
 ```bash
 # install dependencies
@@ -23,7 +23,7 @@ yarn install
 
 ```bash
 # run at localhost:3000
-yarn start
+yarn dev
 ```
 
 # :man_technologist: About the author
