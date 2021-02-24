@@ -8,8 +8,6 @@ import PrismicDOM from 'prismic-dom';
 
 import { client } from '@/lib/prismic';
 
-import SEO from '@/components/SEO';
-
 import {
   Container,
   Section,
@@ -17,10 +15,12 @@ import {
   ContainerRight,
 } from '@/styles/pages/home';
 
+import SEO from '@/components/SEO';
 import { ExperienceBar } from '@/components/ExperienceBar';
 import { Profile } from '@/components/Profile';
 import { CompletedChallenges } from '@/components/CompletedChallenges';
 import { Countdown } from '@/components/Countdown';
+import { ChallengeBox } from '@/components/ChallengeBox';
 
 // TODO: CLIENT SIDE FETCHING
 // interface IProduct {
@@ -62,7 +62,9 @@ export default function Home({ recommendedProducts }: HomeProps) {
           <CompletedChallenges />
           <Countdown />
         </ContainerLeft>
-        <ContainerRight>Content</ContainerRight>
+        <ContainerRight>
+          <ChallengeBox />
+        </ContainerRight>
       </Section>
 
       {/* <section>
