@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.div<{ isActive: boolean }>`
   .clock {
     align-items: center;
     color: var(--title);
@@ -40,10 +40,10 @@ export const Container = styled.div`
 
   button {
     align-items: center;
-    background: var(--blue);
+    background: ${(props) => (props.isActive ? 'var(--white)' : 'var(--blue)')};
     border-radius: 5px;
     border: 0;
-    color: var(--white);
+    color: ${(props) => (props.isActive ? 'var(--title)' : 'var(--white)')};
     display: flex;
     font-size: 1.25rem;
     font-weight: 600;
@@ -54,11 +54,25 @@ export const Container = styled.div`
     transition: background 300ms ease;
 
     &:hover {
-      background: var(--blue-dark);
+      background: ${(props) =>
+        props.isActive ? 'var(--red)' : 'var(--blue-dark)'};
+      color: ${(props) => (props.isActive ? 'var(--white)' : '')};
+
+      img {
+        filter: ${(props) =>
+          props.isActive ? 'brightness(0) invert(1);' : ''};
+      }
+    }
+
+    &:disabled {
+      background: var(--white);
+      border-bottom: solid 4px var(--green);
+      color: var(--text);
+      cursor: default;
     }
 
     img {
-      margin-left: 0.5rem;
+      margin-left: 1rem;
     }
   }
 `;
