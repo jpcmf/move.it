@@ -1,11 +1,17 @@
-# Move.it
+<h1 align="center">
+    <img alt="Next Level Week" src=".github/nlw.svg" width="200px" />
+</h1>
 
-<p align="center">In this repository, you'll find the front end application developed in the Next Level Week 04 by Rocketseat 🎓 (2021).</p>
+<h3 align="center">
+  <img alt="Next Level Week" src=".github/logo-full.svg" width="200px" /> <br/>
+</h3>
+
+<p align="center">In this repository you'll find the front end application developed in the Next Level Week 04 by Rocketseat 🎓 (2021). <strong>Learning</strong> is continuous and there will always be a <strong>next level</strong>.</p>
 
 <p align="center">
   <a href="#computer-front-end">Front end</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#man_technologist-about-the-author">About the author</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#memo-license">License</a>
+  <a href="#memo-license">License</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#man_technologist-about-the-author">About the author</a>
 </p>
 
 # :gear: Build Setup
@@ -14,7 +20,7 @@ The project requires [Node.js](https://nodejs.org/) to run locally.
 
 # :computer: Front end
 
-After cloning the repository, go to the folder named `move.it` and install all the dependencies `yarn install` required and run the project by using the command `yarn dev`.
+After cloning the repository, go to the folder named `move.it` and install all the dependencies required using the command `yarn install` and run the project by using the command `yarn dev`.
 
 ```bash
 # install dependencies
@@ -23,8 +29,12 @@ yarn install
 
 ```bash
 # run at localhost:3000
-yarn start
+yarn dev
 ```
+
+# :memo: License
+
+This project is under the MIT license. See the [LICENSE](LICENSE.md) file for more details.
 
 # :man_technologist: About the author
 
@@ -36,10 +46,6 @@ yarn start
 [![Gmail Badge](https://img.shields.io/badge/-jpfricks@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:jpfricks@gmail.com)](mailto:jpfricks@gmail.com)
 
 <small>“Love the life you live. Live the life you love.” – Bob Marley</small>
-
-# :memo: License
-
-This project is under the MIT license. See the [LICENSE](LICENSE.md) file for more details.
 
 –––
 
