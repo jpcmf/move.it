@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Container } from './styles';
 
+let countdownTimeout: NodeJS.Timeout;
+
 export function Countdown() {
   const [time, setTime] = useState(25 * 60);
-  const [active, setActive] = useState(false);
+  const [isActive, setIsActive] = useState<boolean>(false);
+  const [hasFinished, setHasFinished] = useState<boolean>(false);
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
@@ -12,21 +15,28 @@ export function Countdown() {
   const [secondLeft, secondRight] = String(seconds).padStart(2, '0').split('');
 
   function startCountdown() {
-    setActive(true);
+    setIsActive(true);
+  }
+
+  function resetCountdown() {
+    clearTimeout(countdownTimeout);
+    setIsActive(false);
+    setTime(25 * 60);
   }
 
   useEffect(() => {
-    console.log(active);
-
-    if (active && time > 0) {
-      setTimeout(() => {
+    if (isActive && time > 0) {
+      countdownTimeout = setTimeout(() => {
         setTime(time - 1);
       }, 1000);
+    } else if (isActive && time === 0) {
+      setHasFinished(true);
+      setIsActive(false);
     }
-  }, [active, time]);
+  }, [isActive, time]);
 
   return (
-    <Container>
+    <Container isActive={isActive}>
       <div className="clock">
         <div>
           <span>{minuteLeft}</span>
@@ -41,10 +51,21 @@ export function Countdown() {
         </div>
       </div>
 
-      <button type="button" onClick={startCountdown}>
-        Start a cycle
-        <img src="icons/play-arrow.svg" alt="icon" />
-      </button>
+      {hasFinished ? (
+        <button disabled>
+          Cycle ended <img src="icons/check-circle.svg" alt="icon check" />
+        </button>
+      ) : isActive ? (
+        <button type="button" onClick={resetCountdown}>
+          Leave the cycle
+          <img src="icons/close.svg" alt="icon close" />
+        </button>
+      ) : (
+        <button type="button" onClick={startCountdown}>
+          Start a cycle
+          <img src="icons/play-arrow.svg" alt="icon play" />
+        </button>
+      )}
     </Container>
   );
 }
