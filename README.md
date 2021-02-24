@@ -1,12 +1,14 @@
 <h1 align="center">
-    <img alt="Next Level Week" src=".github/nlw.svg" width="200px" />
+  <img alt="Next Level Week" src=".github/nlw.svg" width="200" />
 </h1>
 
-<h3 align="center">
-  <img alt="Next Level Week" src=".github/logo-full.svg" width="200px" /> <br/>
-</h3>
+<img alt="Next Level Week #04" src=".github/cover-move.it.png" /> <br/>
 
 <p align="center">In this repository you'll find the front end application developed in the Next Level Week 04 by Rocketseat 🎓 (2021). <strong>Learning</strong> is continuous and there will always be a <strong>next level</strong>.</p>
+
+<h3 align="center">
+  <img alt="move.it" src=".github/logo-full.svg" width="170" /> <br/>
+</h3>
 
 <p align="center">
   <a href="#computer-front-end">Front end</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
