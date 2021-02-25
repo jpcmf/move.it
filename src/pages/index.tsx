@@ -8,6 +8,8 @@ import PrismicDOM from 'prismic-dom';
 
 import { client } from '@/lib/prismic';
 
+import { CountdownProvider } from '@/contexts/CountdownContext';
+
 import {
   Container,
   Section,
@@ -56,16 +58,19 @@ export default function Home({ recommendedProducts }: HomeProps) {
 
       <ExperienceBar />
 
-      <Section>
-        <ContainerLeft>
-          <Profile />
-          <CompletedChallenges />
-          <Countdown />
-        </ContainerLeft>
-        <ContainerRight>
-          <ChallengeBox />
-        </ContainerRight>
-      </Section>
+      {/* provider */}
+      <CountdownProvider>
+        <Section>
+          <ContainerLeft>
+            <Profile />
+            <CompletedChallenges />
+            <Countdown />
+          </ContainerLeft>
+          <ContainerRight>
+            <ChallengeBox />
+          </ContainerRight>
+        </Section>
+      </CountdownProvider>
 
       {/* <section>
         <h1>Products</h1>
