@@ -23,5 +23,3 @@ export function ExperienceBar() {
     </Container>
   );
 }
-
-// export default ExperienceBar;
