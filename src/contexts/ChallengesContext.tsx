@@ -48,9 +48,11 @@ export function ChallengeProvider({ children }: ChallengesProviderProps) {
 
     setActiveChallenge(challenge);
 
+    new Audio('/notification.mp3').play();
+
     if (Notification.permission === 'granted') {
-      new Notification('New challenge 🎉', {
-        body: `Win ${challenge.amount}xp`,
+      new Notification('New challenge 🎉 | move.it', {
+        body: `Ear ${challenge.amount} xp when completing this task`,
       });
     }
   }
