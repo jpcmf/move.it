@@ -1,6 +1,10 @@
+import { useContext } from 'react';
+import { ChallengesContext } from '@/contexts/ChallengesContext';
 import { Container } from './styles';
 
 export function ChallengeBox() {
+  const { startNewChallenge } = useContext(ChallengesContext);
+
   const hasActiveChallenge = true;
 
   return (
