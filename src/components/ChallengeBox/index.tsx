@@ -3,7 +3,9 @@ import { ChallengesContext } from '@/contexts/ChallengesContext';
 import { Container } from './styles';
 
 export function ChallengeBox() {
-  const { activeChallenge, resetChallenge } = useContext(ChallengesContext);
+  const { activeChallenge, resetChallenge, completeChallenge } = useContext(
+    ChallengesContext
+  );
 
   return (
     <Container>
@@ -23,7 +25,11 @@ export function ChallengeBox() {
             >
               I failed
             </button>
-            <button type="button" className="btn-completed" onClick={() => {}}>
+            <button
+              type="button"
+              className="btn-completed"
+              onClick={completeChallenge}
+            >
               I completed
             </button>
           </footer>
