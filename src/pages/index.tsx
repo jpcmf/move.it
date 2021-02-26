@@ -1,13 +1,14 @@
 // import { useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
-import Link from 'next/link';
+// import Link from 'next/link';
 
-import Prismic from 'prismic-javascript';
-import { Document } from 'prismic-javascript/types/documents';
-import PrismicDOM from 'prismic-dom';
+// import Prismic from 'prismic-javascript';
+// import { Document } from 'prismic-javascript/types/documents';
+// import PrismicDOM from 'prismic-dom';
 
-import { client } from '@/lib/prismic';
+// import { client } from '@/lib/prismic';
 
+import { ChallengeProvider } from '@/contexts/ChallengesContext';
 import { CountdownProvider } from '@/contexts/CountdownContext';
 
 import {
@@ -23,95 +24,56 @@ import { Profile } from '@/components/Profile';
 import { CompletedChallenges } from '@/components/CompletedChallenges';
 import { Countdown } from '@/components/Countdown';
 import { ChallengeBox } from '@/components/ChallengeBox';
-
-// TODO: CLIENT SIDE FETCHING
-// interface IProduct {
-//   id: string;
-//   title: string;
-// }
-
-// TODO: SERVER SIDE FETCHING
-interface HomeProps {
-  recommendedProducts: Document[];
+interface HomeProps2 {
+  level: number;
+  currentExperience: number;
+  challengesCompleted: number;
 }
 
-export default function Home({ recommendedProducts }: HomeProps) {
-  // TODO: CLIENT SIDE FETCHING
-  // const apiUrl = process.env.API_URL + '/recommended';
-  // const [recommendedProducts, setRecommendedProducts] = useState<IProduct[]>([]);
-
-  // useEffect(() => {
-  //   fetch(apiUrl).then(response => {
-  //     response.json().then(data => {
-  //       setRecommendedProducts(data);
-  //     })
-  //   })
-  // }, []);
+export default function Home(props: HomeProps2) {
+  console.log(props);
 
   return (
-    <Container>
-      <SEO
-        title="Start 🚀"
-        image="teste.jpg"
-        // shouldExcludeTitleSuffix
-      />
+    <ChallengeProvider
+      level={props.level}
+      currentExperience={props.currentExperience}
+      challengesCompleted={props.challengesCompleted}
+    >
+      <Container>
+        <SEO
+          title="Start 🚀"
+          image="teste.jpg"
+          // shouldExcludeTitleSuffix
+        />
 
-      <ExperienceBar />
+        <ExperienceBar />
 
-      {/* provider */}
-      <CountdownProvider>
-        <Section>
-          <ContainerLeft>
-            <Profile />
-            <CompletedChallenges />
-            <Countdown />
-          </ContainerLeft>
-          <ContainerRight>
-            <ChallengeBox />
-          </ContainerRight>
-        </Section>
-      </CountdownProvider>
-
-      {/* <section>
-        <h1>Products</h1>
-
-        <ul>
-          {recommendedProducts.map((recommendedProduct) => {
-            return (
-              <li key={recommendedProduct.id}>
-                <Link href={`/catalog/products/${recommendedProduct.uid}`}>
-                  {PrismicDOM.RichText.asText(recommendedProduct.data.title)}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </section> */}
-    </Container>
+        {/* provider */}
+        <CountdownProvider>
+          <Section>
+            <ContainerLeft>
+              <Profile />
+              <CompletedChallenges />
+              <Countdown />
+            </ContainerLeft>
+            <ContainerRight>
+              <ChallengeBox />
+            </ContainerRight>
+          </Section>
+        </CountdownProvider>
+      </Container>
+    </ChallengeProvider>
   );
 }
 
-// TODO: SERVER SIDE FETCHING
-// export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
-//   const apiUrl = process.env.API_URL + "/recommended";
-//   const response = await fetch(apiUrl);
-//   const recommendedProducts = await response.json();
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { level, currentExperience, challengesCompleted } = ctx.req.cookies;
 
-//   return {
-//     props: {
-//       recommendedProducts,
-//     },
-//   };
-// };
-
-// export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
-//   const recommendedProducts = await client().query([
-//     Prismic.Predicates.at('document.type', 'product'),
-//   ]);
-
-//   return {
-//     props: {
-//       recommendedProducts: recommendedProducts.results,
-//     },
-//   };
-// };
+  return {
+    props: {
+      level: Number(level),
+      currentExperience: Number(currentExperience),
+      challengesCompleted: Number(challengesCompleted),
+    },
+  };
+};
