@@ -31,8 +31,6 @@ interface HomeProps2 {
 }
 
 export default function Home(props: HomeProps2) {
-  console.log(props);
-
   return (
     <ChallengeProvider
       level={props.level}
