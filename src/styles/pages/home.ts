@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { device } from '../device';
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -10,11 +12,17 @@ export const Container = styled.div`
 `;
 
 export const Section = styled.section`
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 6.25rem;
   align-content: center;
+  display: grid;
+  flex: 1;
+  grid-gap: 6.25rem;
+  grid-template-columns: repeat(1fr);
+  padding: 3.5rem 0;
+
+  @media ${device.tablet} {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 2rem 0;
+  }
 `;
 
 export const ContainerLeft = styled.div`

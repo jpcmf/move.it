@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
+import './css/animations.module.css';
+
 export default createGlobalStyle`
 
   @media(max-width: 1080px) {
