@@ -13,6 +13,8 @@ import { CountdownProvider } from '@/contexts/CountdownContext';
 
 import {
   Container,
+  Wrapper,
+  InnerContainer,
   Section,
   ContainerLeft,
   ContainerRight,
@@ -24,6 +26,8 @@ import { Profile } from '@/components/Profile';
 import { CompletedChallenges } from '@/components/CompletedChallenges';
 import { Countdown } from '@/components/Countdown';
 import { ChallengeBox } from '@/components/ChallengeBox';
+import { Sidebar } from '@/components/Sidebar';
+
 interface HomeProps2 {
   level: number;
   currentExperience: number;
@@ -37,29 +41,34 @@ export default function Home(props: HomeProps2) {
       currentExperience={props.currentExperience}
       challengesCompleted={props.challengesCompleted}
     >
-      <Container>
+      <>
         <SEO
           title="Start 🚀"
           image="teste.jpg"
           // shouldExcludeTitleSuffix
         />
+        <Wrapper>
+          <Sidebar />
 
-        <ExperienceBar />
+          <InnerContainer>
+            <ExperienceBar />
 
-        {/* provider */}
-        <CountdownProvider>
-          <Section>
-            <ContainerLeft>
-              <Profile />
-              <CompletedChallenges />
-              <Countdown />
-            </ContainerLeft>
-            <ContainerRight>
-              <ChallengeBox />
-            </ContainerRight>
-          </Section>
-        </CountdownProvider>
-      </Container>
+            {/* provider */}
+            <CountdownProvider>
+              <Section>
+                <ContainerLeft>
+                  <Profile />
+                  <CompletedChallenges />
+                  <Countdown />
+                </ContainerLeft>
+                <ContainerRight>
+                  <ChallengeBox />
+                </ContainerRight>
+              </Section>
+            </CountdownProvider>
+          </InnerContainer>
+        </Wrapper>
+      </>
     </ChallengeProvider>
   );
 }
