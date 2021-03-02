@@ -1,4 +1,4 @@
-// import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { GetServerSideProps } from 'next';
 // import Link from 'next/link';
 
@@ -10,6 +10,8 @@ import { GetServerSideProps } from 'next';
 
 import { ChallengeProvider } from '@/contexts/ChallengesContext';
 import { CountdownProvider } from '@/contexts/CountdownContext';
+
+import { loadFirebase } from '../utils/firebase';
 
 import {
   Container,
@@ -34,12 +36,33 @@ interface HomeProps2 {
   challengesCompleted: number;
 }
 
-export default function Home(props: HomeProps2) {
+export default function Home({ ...rest }) {
+  const saveProfile = useCallback(async (xpData) => {
+    const firebase = loadFirebase();
+    const db = firebase.ref('profiles');
+    db.on('value', (snapshot) => {
+      const profiles = snapshot.val();
+
+      !profiles && db.push(xpData);
+
+      for (const profile in profiles) {
+        if (profiles[profile].user === xpData.user) {
+          db.child(profile).update(xpData);
+        } else {
+          xpData.user && db.push(xpData);
+        }
+      }
+    });
+    db.off();
+  }, []);
+
   return (
     <ChallengeProvider
-      level={props.level}
-      currentExperience={props.currentExperience}
-      challengesCompleted={props.challengesCompleted}
+      user={rest.session.user}
+      level={rest.level}
+      currentExperience={rest.currentExperience}
+      challengesCompleted={rest.challengesCompleted}
+      saveProfile={saveProfile}
     >
       <>
         <SEO
@@ -57,7 +80,7 @@ export default function Home(props: HomeProps2) {
             <CountdownProvider>
               <Section>
                 <ContainerLeft>
-                  <Profile />
+                  <Profile data={rest.session} />
                   <CompletedChallenges />
                   <Countdown />
                 </ContainerLeft>
