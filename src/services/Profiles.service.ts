@@ -1,4 +1,5 @@
-import firebase from '../utils/firebase';
+// import { firebase } from '../utils/firebase';
+const firebase = require('../utils/firebase');
 
 const db = firebase.ref('profiles');
 

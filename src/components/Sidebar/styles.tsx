@@ -12,7 +12,7 @@ const fadeLeft = keyframes`
 `;
 
 export const Container = styled.div`
-  animation: ${fadeLeft} 1s;
+  animation: 700ms ease 0s 1 ${fadeLeft};
   align-items: stretch;
   background-image: linear-gradient(var(--shape), var(--background));
   display: flex;

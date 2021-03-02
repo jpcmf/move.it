@@ -48,6 +48,7 @@ export const Container = styled.div`
     flex-direction: column;
     height: 100%;
     width: 100%;
+    /* opacity: 0; */
 
     header {
       border-bottom: solid 1px var(--gray-line);
