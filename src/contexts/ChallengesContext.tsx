@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import challenges from '../../challenges.json';
 
 import { LevelUpModal } from '@/components/LevelUpModal';
+import { log } from 'console';
 
 interface Challenge {
   type: 'body' | 'eye';
@@ -11,6 +12,7 @@ interface Challenge {
 }
 
 interface ChallengeContextData {
+  user: string;
   level: number;
   currentExperience: number;
   challengesCompleted: number;
@@ -21,21 +23,29 @@ interface ChallengeContextData {
   resetChallenge: () => void;
   completeChallenge: () => void;
   closeLevelUpModal: () => void;
+  profileData: ProfileProps;
 }
 
 interface ChallengesProviderProps {
   children: ReactNode;
+  user: string;
   level: number;
   currentExperience: number;
   challengesCompleted: number;
 }
 
+interface ProfileProps {
+  user: string;
+  level: number;
+  challenges: number;
+  currentxp: number;
+  totalxp: number;
+}
+
 export const ChallengesContext = createContext({} as ChallengeContextData);
 
-export function ChallengeProvider({
-  children,
-  ...rest
-}: ChallengesProviderProps) {
+export function ChallengeProvider({ children, ...rest }) {
+  const [user] = useState(rest.user);
   const [level, setLevel] = useState(rest.level ?? 1);
   const [currentExperience, setCurrentExperience] = useState(
     rest.currentExperience ?? 0
@@ -48,6 +58,14 @@ export function ChallengeProvider({
 
   const experienceToNextLevel = Math.pow((level + 1) * 4, 2);
 
+  const [profileData, setProfileData] = useState({
+    user: user.email,
+    level: level,
+    challenges: challengesCompleted,
+    currentxp: currentExperience,
+    totalxp: 0,
+  });
+
   useEffect(() => {
     Notification.requestPermission();
   }, []);
@@ -57,6 +75,20 @@ export function ChallengeProvider({
     Cookies.set('currentExperience', String(currentExperience));
     Cookies.set('challengesCompleted', String(challengesCompleted));
   }, [level, currentExperience, challengesCompleted]);
+
+  useEffect(() => {
+    setProfileData({
+      user: user.email,
+      level: level,
+      challenges: challengesCompleted,
+      currentxp: currentExperience,
+      totalxp: 0,
+    });
+  }, []);
+
+  useEffect(() => {
+    rest.saveProfile(profileData);
+  }, [profileData]);
 
   function levelUp() {
     setLevel(level + 1);
@@ -107,6 +139,7 @@ export function ChallengeProvider({
   return (
     <ChallengesContext.Provider
       value={{
+        user,
         level,
         currentExperience,
         challengesCompleted,
@@ -117,6 +150,7 @@ export function ChallengeProvider({
         resetChallenge,
         completeChallenge,
         closeLevelUpModal,
+        profileData,
       }}
     >
       {children}
