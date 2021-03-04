@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Overlay = styled.div`
   align-items: center;
-  background: rgba(242, 243, 245, 0, 8);
+  background: rgba(242, 243, 245, 0.8);
   bottom: 0;
   display: flex;
   justify-content: center;

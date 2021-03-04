@@ -1,9 +1,8 @@
-import { createContext, ReactNode, useEffect, useState } from 'react';
+import { createContext, ReactNode, useEffect, useMemo, useState } from 'react';
 import Cookies from 'js-cookie';
 import challenges from '../../challenges.json';
 
 import { LevelUpModal } from '@/components/LevelUpModal';
-import { log } from 'console';
 
 interface Challenge {
   type: 'body' | 'eye';
@@ -12,7 +11,6 @@ interface Challenge {
 }
 
 interface ChallengeContextData {
-  user: string;
   level: number;
   currentExperience: number;
   challengesCompleted: number;
@@ -24,18 +22,22 @@ interface ChallengeContextData {
   completeChallenge: () => void;
   closeLevelUpModal: () => void;
   profileData: ProfileProps;
+  totalExperience: number;
 }
 
 interface ChallengesProviderProps {
   children: ReactNode;
-  user: string;
-  level: number;
-  currentExperience: number;
-  challengesCompleted: number;
+  dataUser: ProfileProps;
+}
+
+interface UserProps {
+  name: string;
+  email: string;
+  image: string;
 }
 
 interface ProfileProps {
-  user: string;
+  user: UserProps;
   level: number;
   challenges: number;
   currentxp: number;
@@ -45,25 +47,27 @@ interface ProfileProps {
 export const ChallengesContext = createContext({} as ChallengeContextData);
 
 export function ChallengeProvider({ children, ...rest }) {
-  const [user] = useState(rest.user);
-  const [level, setLevel] = useState(rest.level ?? 1);
+  const [dataUser] = useState(rest.user);
+  const [level, setLevel] = useState(dataUser.level);
   const [currentExperience, setCurrentExperience] = useState(
-    rest.currentExperience ?? 0
+    dataUser.currentxp
   );
   const [challengesCompleted, setChallengesCompleted] = useState(
-    rest.challengesCompleted ?? 0
+    dataUser.challenges
   );
+  const [totalExperience, setTotalExperience] = useState(dataUser.totalxp);
+
   const [activeChallenge, setActiveChallenge] = useState(null);
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
 
   const experienceToNextLevel = Math.pow((level + 1) * 4, 2);
 
   const [profileData, setProfileData] = useState({
-    user: user.email,
+    user: dataUser.user,
     level: level,
     challenges: challengesCompleted,
     currentxp: currentExperience,
-    totalxp: 0,
+    totalxp: totalExperience,
   });
 
   useEffect(() => {
@@ -78,16 +82,16 @@ export function ChallengeProvider({ children, ...rest }) {
 
   useEffect(() => {
     setProfileData({
-      user: user.email,
+      user: dataUser.user,
       level: level,
       challenges: challengesCompleted,
       currentxp: currentExperience,
       totalxp: 0,
     });
-  }, []);
+  }, [level, currentExperience, challengesCompleted, totalExperience]);
 
-  useEffect(() => {
-    rest.saveProfile(profileData);
+  useMemo(() => {
+    rest.saveUser(profileData);
   }, [profileData]);
 
   function levelUp() {
@@ -130,6 +134,7 @@ export function ChallengeProvider({ children, ...rest }) {
     setCurrentExperience(finalExperience);
     resetChallenge();
     setChallengesCompleted(challengesCompleted + 1);
+    setTotalExperience(totalExperience + amount);
   }
 
   function closeLevelUpModal() {
@@ -139,7 +144,6 @@ export function ChallengeProvider({ children, ...rest }) {
   return (
     <ChallengesContext.Provider
       value={{
-        user,
         level,
         currentExperience,
         challengesCompleted,
@@ -151,6 +155,7 @@ export function ChallengeProvider({ children, ...rest }) {
         completeChallenge,
         closeLevelUpModal,
         profileData,
+        totalExperience,
       }}
     >
       {children}
