@@ -12,7 +12,7 @@ export const Container = styled.ul`
   .top-user {
     display: grid;
     grid-template-columns: 1fr 11fr;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     width: 100%;
   }
 
@@ -32,6 +32,7 @@ export const Container = styled.ul`
     strong {
       color: var(--title);
       font-size: 1.5rem;
+      font-weight: 500;
     }
   }
 
@@ -91,9 +92,9 @@ export const Container = styled.ul`
     }
 
     div {
+      align-items: flex-start;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
     }
 
@@ -127,7 +128,7 @@ export const Container = styled.ul`
     p {
       color: var(--text);
       font-size: 0.75rem;
-      font-weight: 600;
+      font-weight: 500;
       line-height: 1.4;
 
       @media ${device.tablet} {
@@ -138,6 +139,7 @@ export const Container = styled.ul`
     strong {
       color: var(--blue-dark);
       font-size: 1.5rem;
+      font-weight: 500;
 
       @media ${device.tablet} {
         font-size: 1rem;

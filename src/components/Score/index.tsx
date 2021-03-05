@@ -51,7 +51,9 @@ export function Score(props) {
                   </p>
                 </span>
                 <span>
-                  <strong>{user.totalxp}</strong> xp
+                  <p>
+                    <strong>{user.totalxp}</strong> xp
+                  </p>
                 </span>
               </span>
             </div>
