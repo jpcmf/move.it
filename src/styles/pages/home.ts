@@ -2,14 +2,7 @@ import styled, { keyframes } from 'styled-components';
 
 import { device } from '../device';
 
-export const Container = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  height: 100vh;
-  margin: 0 auto;
-  max-width: 992px;
-  padding: 2.5rem 2rem; */
-`;
+export const Container = styled.div``;
 
 export const Wrapper = styled.div`
   align-items: center;
@@ -23,7 +16,7 @@ export const InnerContainer = styled.div`
   height: 100vh;
   margin: 0 auto;
   max-width: 992px;
-  padding: 2.5rem 2rem;
+  padding: 2.5rem 2rem 2.5rem 9rem;
 `;
 
 export const Section = styled.section`

@@ -15,7 +15,7 @@ export const InnerContainer = styled.div`
   height: 100vh;
   margin: 7rem auto 0;
   max-width: 992px;
-  padding: 2.5rem 2rem;
+  padding: 2.5rem 2rem 2.5rem 9rem;
   width: 100%;
 
   @media ${device.tablet} {

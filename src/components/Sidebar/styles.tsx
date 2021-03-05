@@ -22,6 +22,7 @@ export const Container = styled.aside`
   justify-content: space-between;
   min-width: 5rem;
   width: 7rem;
+  position: fixed;
 
   header {
     align-items: center;
