@@ -11,16 +11,18 @@ const fadeLeft = keyframes`
   }
 `;
 
-export const Container = styled.div`
-  animation: 700ms ease 0s 1 ${fadeLeft};
+export const Container = styled.aside`
   align-items: stretch;
+  animation: 700ms ease 0s 1 ${fadeLeft};
   background-image: linear-gradient(var(--shape), var(--background));
   display: flex;
+  filter: drop-shadow(0px 0px 60px rgba(0, 0, 0, 0.05));
   flex-direction: column;
   height: 100vh;
   justify-content: space-between;
   min-width: 5rem;
   width: 7rem;
+  position: fixed;
 
   header {
     align-items: center;
@@ -37,6 +39,47 @@ export const Container = styled.div`
   }
 
   nav {
+    ul {
+      li {
+        text-align: center;
+        position: relative;
+        padding: 0.5rem 0;
+        margin: 0.5rem 0;
+
+        &.active {
+          &:before {
+            background-color: var(--green);
+            border-radius: 0 0.3125rem 0.3125rem 0;
+            bottom: 0;
+            content: '';
+            display: block;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 0.25rem;
+          }
+
+          a {
+            svg {
+              fill: var(--green);
+            }
+          }
+        }
+
+        a {
+          svg {
+            fill: var(--text);
+            transition: fill 300ms ease;
+          }
+
+          &:hover {
+            svg {
+              fill: var(--green);
+            }
+          }
+        }
+      }
+    }
   }
 
   footer {

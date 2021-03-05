@@ -64,9 +64,10 @@ export default function Home({ ...rest }) {
           for (const key in users) {
             if (users[key].user.email === xpData.user.email) {
               db.child(key).update(xpData);
+            } else if (!xpData.user.email) {
+              xpData.user && db.push(xpData);
             } else {
-              router.push('/');
-              console.log('Error updating profile');
+              router.push('/login');
             }
           }
         })
@@ -87,27 +88,23 @@ export default function Home({ ...rest }) {
       currentxp: 0,
       totalxp: 0,
     };
+
     db.get()
       .then((snapshot) => {
         const profile = snapshot.val();
-        if (!profile && data.user.email != '') {
-          db.push(data); /// magic here
-        }
+        !profile && db.push(data); /// magic here
       })
       .catch((error) => {
         console.log('Error loading profile', error);
       });
-    for (const profile in profiles) {
-      if (profiles[profile].user.email == '') {
-        db.child(profile).remove();
-      }
 
+    for (const profile in profiles) {
       if (profiles[profile].user.email === rest.session.user.email) {
         data = profiles[profile];
-      } else if (rest.session.user.email) {
+      } else if (!rest.session.user.email) {
         db.push(data);
       } else {
-        router.push('/');
+        router.push('/login');
       }
     }
 
