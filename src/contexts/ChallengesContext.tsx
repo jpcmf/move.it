@@ -1,6 +1,6 @@
 import challenges from '../../challenges.json';
 import { createContext, ReactNode, useEffect, useMemo, useState } from 'react';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 import toast from 'react-hot-toast';
 
 import { LevelUpModal } from '@/components/LevelUpModal';

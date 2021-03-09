@@ -1,19 +1,10 @@
-import { useEffect, useState, useCallback, useMemo } from 'react';
-import { GetServerSideProps } from 'next';
+import { useEffect, useCallback, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { loadFirebase } from '../utils/firebase';
 import { Toaster } from 'react-hot-toast';
 import { getSession, useSession } from 'next-auth/client';
-// import Link from 'next/link';
-
-// import Prismic from 'prismic-javascript';
-// import { Document } from 'prismic-javascript/types/documents';
-// import PrismicDOM from 'prismic-dom';
-
-// import { client } from '@/lib/prismic';
 
 import {
-  Container,
   Wrapper,
   InnerContainer,
   Section,
@@ -31,12 +22,6 @@ import { CompletedChallenges } from '@/components/CompletedChallenges';
 import { Countdown } from '@/components/Countdown';
 import { ChallengeBox } from '@/components/ChallengeBox';
 import { Sidebar } from '@/components/Sidebar';
-
-// interface HomeProps2 {
-//   level: number;
-//   currentExperience: number;
-//   challengesCompleted: number;
-// }
 
 interface UserProps {
   name: string;
@@ -142,68 +127,6 @@ export default function Home({ ...pageProps }) {
       </div>
     );
   }
-
-  // const saveProfile = useCallback(async (xpdata) => {
-  //   if (xpData.totalxp > 0) {
-  //     const firebase = loadFirebase();
-  //     const db = firebase.ref('profiles');
-  //     db.get()
-  //       .then((snapshot) => {
-  //         const users = snapshot.val();
-  //         for (const key in users) {
-  //           if (users[key].user.email === xpData.user.email) {
-  //             db.child(key).update(xpData);
-  //           } else if (!xpData.user.email) {
-  //             xpData.user && db.push(xpData);
-  //           } else {
-  //             router.push('/login');
-  //           }
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.log('Error getting user', error);
-  //       });
-  //   }
-  // }, []);
-
-  // function loadProfile() {
-  //   const firebase = loadFirebase();
-  //   const db = firebase.ref('profiles');
-
-  //   let userData: ProfileProps = {
-  //     user: rest.session.user,
-  //     level: 1,
-  //     challenges: 0,
-  //     currentxp: 0,
-  //     totalxp: 0,
-  //   };
-
-  //   db.get()
-  //     .then((snapshot) => {
-  //       const profile = snapshot.val();
-  //       if (!profile && userData.user.email != '') {
-  //         db.push(userData);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log('Error loading profile', error);
-  //     });
-
-  //   for (const profile in profiles) {
-  //     if (profiles[profile].user.email == '') {
-  //       db.child(profile).remove();
-  //     }
-  //     if (profiles[profile].user.email === rest.session.user.email) {
-  //       userData = profiles[profile];
-  //     } else if (rest.session.user.email && !profiles[profile].user.email) {
-  //       db.push(userData);
-  //     }
-  //   }
-
-  //   return userData;
-  // }
-
-  // const userLoaded = loadProfile();
 
   if (session) {
     return (

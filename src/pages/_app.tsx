@@ -17,39 +17,4 @@ export default function MyApp({ Component, ...pageProps }) {
       {<Component {...pageProps} />}
     </Provider>
   );
-
-  // if (typeof window !== 'undefined' && loading) {
-  //   return (
-  //     <>
-  //       <GlobalStyle />
-  //       <div className="loading">
-  //         <span className="c-loader"></span>
-  //       </div>
-  //     </>
-  //   );
-  // }
-
-  // if (session) {
-  //   return (
-  //     <>
-  //       <GlobalStyle />
-  //       {<Component {...pageProps} session={session} />}
-  //     </>
-  //   );
-  // }
-
-  // return (
-  //   <>
-  //     <GlobalStyle />
-  //     {<Login {...pageProps} />}
-  //   </>
-  // );
 }
-
-// export async function getServerSideProps({ context }) {
-//   const session = await getSession(context);
-
-//   return {
-//     props: { session },
-//   };
-// }
