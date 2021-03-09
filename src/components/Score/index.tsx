@@ -7,7 +7,7 @@ export function Score(props) {
 
   Object.keys(list)
     .sort((a, b) => {
-      return list[a].totalxp - list[b].totalxp;
+      return list[b].totalxp - list[a].totalxp;
     })
     .map((key) => {
       usersSorted.push(

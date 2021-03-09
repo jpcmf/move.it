@@ -68,4 +68,33 @@ export default createGlobalStyle`
     button {
       cursor: pointer;
     }
+
+    .loading {
+      align-items: center;
+      background: var(--background);
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      opacity: 0.75;
+      transform: scale(2);
+      width: 100%;
+    }
+
+    .c-loader {
+      animation: is-rotating 1s infinite;
+      border-radius: 50%;
+      border-top-color: var(--green);
+      border: 6px solid var(--gray-line);
+      height: 50px;
+      width: 50px;
+    }
+
+    @keyframes is-rotating {
+    to {
+      transform: rotate(1turn);
+      transform: scale(1.2);
+    }
+}
+
+
 `;

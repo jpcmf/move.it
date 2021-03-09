@@ -14,41 +14,56 @@ interface CountdownContextData {
   hasFinished: boolean;
   startCountdown: () => void;
   resetCountdown: () => void;
+  percentToClose: number;
 }
 
 interface CountdownProviderProps {
   children: ReactNode;
+  user: any;
 }
 
 export const CountdownContext = createContext({} as CountdownContextData);
 
 let countdownTimeout: NodeJS.Timeout;
 
-export function CountdownProvider({ children }: CountdownProviderProps) {
-  const { startNewChallenge } = useContext(ChallengesContext);
+export function CountdownProvider({ children, user }: CountdownProviderProps) {
+  let timer = 25;
 
-  const [time, setTime] = useState(0.1 * 60);
+  location.host === 'localhost:3000' && (timer = 0.1);
+  user.user.email === 'jpfricks@gmail.com' && (timer = 0.1);
+
+  const { startNewChallenge, resetChallenge } = useContext(ChallengesContext);
+
+  const challengeTime = timer * 60;
+
+  const [time, setTime] = useState(challengeTime);
   const [isActive, setIsActive] = useState<boolean>(false);
   const [hasFinished, setHasFinished] = useState<boolean>(false);
+  const [percentToClose, setPercentToClose] = useState(0);
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
 
   function startCountdown() {
     setIsActive(true);
+    setTime(challengeTime);
+    setPercentToClose(100 - (time / challengeTime) * 100);
   }
 
   function resetCountdown() {
     clearTimeout(countdownTimeout);
+    resetChallenge();
+    setPercentToClose(0);
     setIsActive(false);
-    setTime(0.1 * 60);
     setHasFinished(false);
+    setTime(challengeTime);
   }
 
   useEffect(() => {
     if (isActive && time > 0) {
-      countdownTimeout = setTimeout(() => {
+      const countdownTimeout = setTimeout(() => {
         setTime(time - 1);
+        setPercentToClose(100 - (time / challengeTime) * 100);
       }, 1000);
     } else if (isActive && time === 0) {
       setHasFinished(true);
@@ -66,6 +81,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
         hasFinished,
         startCountdown,
         resetCountdown,
+        percentToClose,
       }}
     >
       {children}

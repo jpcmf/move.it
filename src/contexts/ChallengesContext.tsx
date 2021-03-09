@@ -75,11 +75,11 @@ export function ChallengeProvider({ children, ...rest }) {
     Notification.requestPermission();
   }, []);
 
-  useEffect(() => {
-    Cookies.set('level', String(level));
-    Cookies.set('currentExperience', String(currentExperience));
-    Cookies.set('challengesCompleted', String(challengesCompleted));
-  }, [level, currentExperience, challengesCompleted]);
+  // useEffect(() => {
+  //   Cookies.set('level', String(level));
+  //   Cookies.set('currentExperience', String(currentExperience));
+  //   Cookies.set('challengesCompleted', String(challengesCompleted));
+  // }, [level, currentExperience, challengesCompleted]);
 
   useEffect(() => {
     setProfileData({
@@ -92,7 +92,7 @@ export function ChallengeProvider({ children, ...rest }) {
   }, [level, currentExperience, challengesCompleted, totalExperience]);
 
   useMemo(() => {
-    rest.saveUser(profileData);
+    rest.updateUser(profileData);
   }, [profileData]);
 
   function levelUp() {
@@ -100,11 +100,17 @@ export function ChallengeProvider({ children, ...rest }) {
     setIsLevelUpModalOpen(true);
   }
 
-  function startNewChallenge() {
+  function closeLevelUpModal() {
+    setIsLevelUpModalOpen(false);
+  }
+
+  function startNewChallenge(): void {
     const randomChallengeIndex = Math.floor(Math.random() * challenges.length);
     const challenge = challenges[randomChallengeIndex];
 
     setActiveChallenge(challenge);
+
+    new Audio('/notification.mp3').play();
 
     const notify = () =>
       toast(`New challenge available! Earn ${challenge.amount} xp.`, {
@@ -155,10 +161,7 @@ export function ChallengeProvider({ children, ...rest }) {
     resetChallenge();
     setChallengesCompleted(challengesCompleted + 1);
     setTotalExperience(totalExperience + amount);
-  }
-
-  function closeLevelUpModal() {
-    setIsLevelUpModalOpen(false);
+    dataUser.user.email === 'jpfricks@gmail.com' && levelUp();
   }
 
   return (

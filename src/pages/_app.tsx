@@ -1,19 +1,55 @@
 import React from 'react';
 import GlobalStyle from '@/styles/global';
-import Login from './login';
-import { useSession } from 'next-auth/client';
+import { Provider } from 'next-auth/client';
 
 export default function MyApp({ Component, ...pageProps }) {
-  const [session] = useSession();
+  const sessionApp = pageProps.session;
 
   return (
-    <>
+    <Provider
+      session={sessionApp}
+      options={{
+        clientMaxAge: 60 * 60,
+        keepAlive: 120 * 60,
+      }}
+    >
       <GlobalStyle />
-      {!session ? (
-        <Login {...pageProps} />
-      ) : (
-        <Component {...pageProps} session={session} />
-      )}
-    </>
+      {<Component {...pageProps} />}
+    </Provider>
   );
+
+  // if (typeof window !== 'undefined' && loading) {
+  //   return (
+  //     <>
+  //       <GlobalStyle />
+  //       <div className="loading">
+  //         <span className="c-loader"></span>
+  //       </div>
+  //     </>
+  //   );
+  // }
+
+  // if (session) {
+  //   return (
+  //     <>
+  //       <GlobalStyle />
+  //       {<Component {...pageProps} session={session} />}
+  //     </>
+  //   );
+  // }
+
+  // return (
+  //   <>
+  //     <GlobalStyle />
+  //     {<Login {...pageProps} />}
+  //   </>
+  // );
 }
+
+// export async function getServerSideProps({ context }) {
+//   const session = await getSession(context);
+
+//   return {
+//     props: { session },
+//   };
+// }
