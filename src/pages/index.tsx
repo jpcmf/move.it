@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { loadFirebase } from '../utils/firebase';
+import { Toaster } from 'react-hot-toast';
 // import Link from 'next/link';
 
 // import Prismic from 'prismic-javascript';
@@ -122,6 +123,7 @@ export default function Home({ ...rest }) {
           // shouldExcludeTitleSuffix
         />
         <Wrapper>
+          <Toaster />
           <Sidebar />
 
           <InnerContainer>

@@ -1,6 +1,7 @@
+import challenges from '../../challenges.json';
 import { createContext, ReactNode, useEffect, useMemo, useState } from 'react';
 import Cookies from 'js-cookie';
-import challenges from '../../challenges.json';
+import toast from 'react-hot-toast';
 
 import { LevelUpModal } from '@/components/LevelUpModal';
 
@@ -105,13 +106,32 @@ export function ChallengeProvider({ children, ...rest }) {
 
     setActiveChallenge(challenge);
 
-    new Audio('/notification.mp3').play();
-
-    if (Notification.permission === 'granted') {
+    const notify = () =>
+      toast(`New challenge available! Earn ${challenge.amount} xp.`, {
+        duration: 10000,
+        style: {
+          background: 'var(--title)',
+          borderRadius: '5px',
+          color: 'var(--shape)',
+        },
+        icon: '🥊',
+        role: 'status',
+        ariaLive: 'polite',
+      });
+    notify();
+    if (
+      'showNotification' in ServiceWorkerRegistration.prototype &&
+      'PushManager' in window &&
+      !(Notification.permission === 'denied')
+    ) {
+      new Audio('/notification.mp3').play();
       new Notification('New challenge 🎉 | move.it', {
         body: `Earn ${challenge.amount} xp when completing this task`,
       });
     }
+
+    // if (Notification.permission === 'granted') {
+    // }
   }
 
   function resetChallenge() {
