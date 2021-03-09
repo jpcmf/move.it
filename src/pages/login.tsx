@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { signIn, useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
+import { AppProps } from 'next/dist/next-server/lib/router/router';
 
 import SEO from '@/components/SEO';
 
 import { Container, InnerContainer } from '@/styles/pages/login';
-import { AppProps } from 'next/dist/next-server/lib/router/router';
 
 const Login: React.FC<AppProps> = ({ ...pageProps }) => {
   const userSession = pageProps.pageProps.session;

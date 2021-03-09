@@ -32,11 +32,11 @@ import { Countdown } from '@/components/Countdown';
 import { ChallengeBox } from '@/components/ChallengeBox';
 import { Sidebar } from '@/components/Sidebar';
 
-interface HomeProps2 {
-  level: number;
-  currentExperience: number;
-  challengesCompleted: number;
-}
+// interface HomeProps2 {
+//   level: number;
+//   currentExperience: number;
+//   challengesCompleted: number;
+// }
 
 interface UserProps {
   name: string;

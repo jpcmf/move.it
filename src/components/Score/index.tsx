@@ -1,7 +1,7 @@
 import { Container } from './styles';
 
 export function Score(props) {
-  let usersSorted = [];
+  const usersSorted = [];
 
   const list = props.profiles;
 
@@ -20,6 +20,7 @@ export function Score(props) {
       );
       return usersSorted;
     });
+
   return (
     <Container>
       {usersSorted.map((user, idx) => {
