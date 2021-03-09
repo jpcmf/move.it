@@ -1,19 +1,20 @@
 import React from 'react';
 import GlobalStyle from '@/styles/global';
-import Login from './login';
-import { useSession } from 'next-auth/client';
+import { Provider } from 'next-auth/client';
 
 export default function MyApp({ Component, ...pageProps }) {
-  const [session] = useSession();
+  const sessionApp = pageProps.session;
 
   return (
-    <>
+    <Provider
+      session={sessionApp}
+      options={{
+        clientMaxAge: 60 * 60,
+        keepAlive: 120 * 60,
+      }}
+    >
       <GlobalStyle />
-      {!session ? (
-        <Login {...pageProps} />
-      ) : (
-        <Component {...pageProps} session={session} />
-      )}
-    </>
+      {<Component {...pageProps} />}
+    </Provider>
   );
 }

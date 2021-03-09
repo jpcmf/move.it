@@ -1,13 +1,13 @@
 import { Container } from './styles';
 
 export function Score(props) {
-  let usersSorted = [];
+  const usersSorted = [];
 
   const list = props.profiles;
 
   Object.keys(list)
     .sort((a, b) => {
-      return list[a].totalxp - list[b].totalxp;
+      return list[b].totalxp - list[a].totalxp;
     })
     .map((key) => {
       usersSorted.push(
@@ -20,6 +20,7 @@ export function Score(props) {
       );
       return usersSorted;
     });
+
   return (
     <Container>
       {usersSorted.map((user, idx) => {
