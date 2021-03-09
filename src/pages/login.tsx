@@ -36,11 +36,12 @@ const Login: React.FC<AppProps> = ({ ...pageProps }) => {
         <button type="button" onClick={() => signIn('github')}>
           <img src="/icons/arrow-right.svg" alt="icon arrow" />
         </button>
-        <small>
+        {/* TODO: ... */}
+        {/* <small>
           O <strong>move.it</strong> é uma aplicação com base na técnica
           Pomodoro, destinada a desenvolvedores para auxiliar no cuidado da sua
           saúde e postura.
-        </small>
+        </small> */}
       </InnerContainer>
     </Container>
   );
