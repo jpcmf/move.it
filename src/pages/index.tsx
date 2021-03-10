@@ -143,7 +143,7 @@ export default function Home({ ...pageProps }) {
           />
           <Wrapper>
             <Toaster />
-            <Sidebar />
+            <Sidebar toggleTheme={pageProps.toggleTheme} />
 
             <InnerContainer>
               <ExperienceBar />

@@ -87,6 +87,23 @@ export const Container = styled.aside`
     align-items: center;
     justify-content: center;
     padding-bottom: 2rem;
+    flex-direction: column;
+
+    .switch-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 0.5rem;
+
+      i {
+        margin-bottom: 0.5rem;
+        font-size: 28px;
+      }
+    }
+
+    .btn-wrapper {
+      padding-top: 0.5rem;
+    }
 
     .btn-signout {
       appearance: none;
