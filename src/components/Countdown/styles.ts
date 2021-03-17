@@ -10,7 +10,7 @@ export const Container = styled.div<{ isActive: boolean }>`
 
     > div {
       align-items: center;
-      background: var(--white);
+      background: var(--shape);
       border-radius: 5px;
       box-shadow: 0 0 60px rgba(0, 0, 0, 0.05);
       display: flex;
@@ -23,11 +23,11 @@ export const Container = styled.div<{ isActive: boolean }>`
         flex: 1;
 
         &:first-child {
-          border-right: 1px solid #f0f1f3;
+          border-right: solid 1px var(--clockBackgroundBorder);
         }
 
         &:last-child {
-          border-left: 1px solid #f0f1f3;
+          border-left: solid 1px var(--clockBackgroundBorder);
         }
       }
     }

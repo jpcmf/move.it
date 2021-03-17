@@ -9,7 +9,7 @@ import { Score } from '@/components/Score';
 export default function Leaderboard({ ...rest }) {
   return (
     <Wrapper>
-      <Sidebar />
+      <Sidebar toggleTheme={rest.toggleTheme} />
 
       <InnerContainer>
         <header>

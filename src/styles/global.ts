@@ -18,18 +18,25 @@ export default createGlobalStyle`
 
   :root {
     --white: #fff;
-    --background: #F2F3F5;
-    --gray-line: #dcdde0;
-    --text: #666;
-    --text-highlight: #b3b9ff;
-    --title: #2e384d;
+    --background: ${(props) => props.theme.colors.background};
+    --gray-line: ${(props) => props.theme.colors.grayLine};
+    --text: ${(props) => props.theme.colors.text};
+    --text-highlight: ${(props) => props.theme.colors.textHighlight};
+    --title: ${(props) => props.theme.colors.title};
     --red: #E83F5B;
     --green: #4CD62B;
     --blue: #5965E0;
     --blue-dark: #4953b8;
     --blue-light: #B2B9FF;
     --blue-twitter: #2AA9E0;
-    --shape: #fff;
+    --shape: ${(props) => props.theme.colors.shape};
+
+    --invert-white: ${(props) => props.theme.colors.invertWhite};
+    --invert-black: ${(props) => props.theme.colors.invertBlack};
+    --overlay: ${(props) => props.theme.colors.overlay};
+
+    --clockBackgroundBorder: ${(props) =>
+      props.theme.colors.clockBackgroundBorder};
   }
 
   * {
@@ -51,6 +58,7 @@ export default createGlobalStyle`
       -webkit-font-smoothing: antialiased !important;
       background-color: var(--background);
       color: var(--text);
+      transition: all 300ms ease;
     }
 
     body, input, button, textarea {

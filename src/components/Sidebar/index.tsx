@@ -1,14 +1,18 @@
+import { useContext } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { signOut } from 'next-auth/client';
+import Switch from 'react-switch';
+import { ThemeContext } from 'styled-components';
 
-import { MdPowerSettingsNew } from 'react-icons/md';
+import { MdPowerSettingsNew, MdWbSunny } from 'react-icons/md';
 import { BiHomeAlt, BiMedal } from 'react-icons/bi';
 
 import { Container } from './styles';
 
-export function Sidebar() {
+export function Sidebar({ toggleTheme }): JSX.Element {
   const router = useRouter();
+  const { colors, title } = useContext(ThemeContext);
 
   function signOutApp() {
     signOut();
@@ -38,14 +42,38 @@ export function Sidebar() {
         </ul>
       </nav>
       <footer>
-        <button
-          className="btn-signout"
-          type="button"
-          onClick={signOutApp}
-          title="Sign Out"
-        >
-          <MdPowerSettingsNew size={30} />
-        </button>
+        <div className="switch-wrapper">
+          <i>
+            {title === 'dark' ? (
+              <MdWbSunny color={'var(--blue)'} />
+            ) : (
+              <MdWbSunny />
+            )}
+          </i>
+          <Switch
+            onChange={toggleTheme}
+            checked={title === 'dark'}
+            checkedIcon={false}
+            uncheckedIcon={false}
+            height={12}
+            width={36}
+            handleDiameter={18}
+            offHandleColor={colors.text}
+            onHandleColor={colors.textHighlight}
+            offColor={colors.grayLine}
+            onColor={colors.text}
+          />
+        </div>
+        <div className="btn-wrapper">
+          <button
+            className="btn-signout"
+            type="button"
+            onClick={signOutApp}
+            title="Sign Out"
+          >
+            <MdPowerSettingsNew size={30} />
+          </button>
+        </div>
       </footer>
     </Container>
   );
