@@ -34,6 +34,9 @@ export default createGlobalStyle`
     --invert-white: ${(props) => props.theme.colors.invertWhite};
     --invert-black: ${(props) => props.theme.colors.invertBlack};
     --overlay: ${(props) => props.theme.colors.overlay};
+
+    --clockBackgroundBorder: ${(props) =>
+      props.theme.colors.clockBackgroundBorder};
   }
 
   * {

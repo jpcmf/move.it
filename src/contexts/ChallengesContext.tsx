@@ -50,11 +50,11 @@ export const ChallengesContext = createContext({} as ChallengeContextData);
 export function ChallengeProvider({ children, ...rest }) {
   const [dataUser] = useState(rest.user);
   const [level, setLevel] = useState(dataUser.level);
-  const [currentExperience, setCurrentExperience] = useState(
-    dataUser.currentxp
-  );
   const [challengesCompleted, setChallengesCompleted] = useState(
     dataUser.challenges
+  );
+  const [currentExperience, setCurrentExperience] = useState(
+    dataUser.currentxp
   );
   const [totalExperience, setTotalExperience] = useState(dataUser.totalxp);
 
@@ -87,7 +87,7 @@ export function ChallengeProvider({ children, ...rest }) {
       level: level,
       challenges: challengesCompleted,
       currentxp: currentExperience,
-      totalxp: 0,
+      totalxp: totalExperience,
     });
   }, [level, currentExperience, challengesCompleted, totalExperience]);
 
@@ -114,7 +114,7 @@ export function ChallengeProvider({ children, ...rest }) {
 
     const notify = () =>
       toast(`New challenge available! Earn ${challenge.amount} xp.`, {
-        duration: 10000,
+        duration: 1000 * 10,
         style: {
           background: 'var(--title)',
           borderRadius: '5px',
@@ -124,20 +124,23 @@ export function ChallengeProvider({ children, ...rest }) {
         role: 'status',
         ariaLive: 'polite',
       });
+
     notify();
+
     if (
       'showNotification' in ServiceWorkerRegistration.prototype &&
       'PushManager' in window &&
       !(Notification.permission === 'denied')
     ) {
-      new Audio('/notification.mp3').play();
+      // new Audio('/notification.mp3').play();
       new Notification('New challenge 🎉 | move.it', {
         body: `Earn ${challenge.amount} xp when completing this task`,
       });
     }
 
-    // if (Notification.permission === 'granted') {
-    // }
+    if (Notification.permission === 'granted') {
+      console.log('permission granted 🎉');
+    }
   }
 
   function resetChallenge() {
@@ -161,7 +164,8 @@ export function ChallengeProvider({ children, ...rest }) {
     resetChallenge();
     setChallengesCompleted(challengesCompleted + 1);
     setTotalExperience(totalExperience + amount);
-    dataUser.user.email === 'jpfricks@gmail.com' && levelUp();
+    rest.stealing && levelUp();
+    // dataUser.user.email === 'jpfricks@gmail.com' && levelUp();
   }
 
   return (
@@ -182,7 +186,6 @@ export function ChallengeProvider({ children, ...rest }) {
       }}
     >
       {children}
-
       {isLevelUpModalOpen && <LevelUpModal />}
     </ChallengesContext.Provider>
   );

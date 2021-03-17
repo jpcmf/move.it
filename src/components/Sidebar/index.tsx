@@ -44,7 +44,11 @@ export function Sidebar({ toggleTheme }): JSX.Element {
       <footer>
         <div className="switch-wrapper">
           <i>
-            {title === 'dark' ? <MdWbSunny /> : <MdWbSunny color="yellow" />}
+            {title === 'dark' ? (
+              <MdWbSunny color={'var(--blue)'} />
+            ) : (
+              <MdWbSunny />
+            )}
           </i>
           <Switch
             onChange={toggleTheme}
