@@ -39,12 +39,13 @@ interface ProfileProps {
 }
 
 export default function Home({ ...pageProps }) {
-  const [stealing, setStealing] = usePersistedState('stealing', true);
+  const [stealing, setStealing] = usePersistedState('stealing', false);
   const [session, loading] = useSession();
   const router = useRouter();
   const profiles = pageProps.pageProps.profiles;
   const userSession = pageProps.pageProps.session;
 
+  // TODO: Notify user about e-mail
   const notifyEmail = () => {
     console.log('toast');
   };
@@ -153,7 +154,7 @@ export default function Home({ ...pageProps }) {
         <>
           <SEO
             title="Start 🚀"
-            image="teste.jpg"
+            image="fb.jpg"
             // shouldExcludeTitleSuffix
           />
           <Wrapper>

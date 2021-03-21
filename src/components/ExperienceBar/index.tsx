@@ -1,6 +1,7 @@
 import { ChallengesContext } from '@/contexts/ChallengesContext';
 import { useContext } from 'react';
 import { Container } from './styles';
+import { MdStar, MdStarBorder, MdStarHalf } from 'react-icons/md';
 
 export function ExperienceBar() {
   const { currentExperience, experienceToNextLevel } = useContext(
@@ -12,14 +13,18 @@ export function ExperienceBar() {
 
   return (
     <Container>
-      <span>0 xp</span>
+      <span>
+        0 <MdStarBorder size="16" />
+      </span>
       <div>
         <div style={{ width: `${percentToNextLevel}%` }}></div>
         <span className="current-xp" style={{ left: `${percentToNextLevel}%` }}>
-          {currentExperience} xp
+          {currentExperience} <MdStarHalf size="16" />
         </span>
       </div>
-      <span>{experienceToNextLevel} xp</span>
+      <span>
+        {experienceToNextLevel} <MdStar size="16" />
+      </span>
     </Container>
   );
 }

@@ -1,12 +1,17 @@
 import styled from 'styled-components';
 
 export const Container = styled.header`
-  /* border: 1px solid #000; */
   display: flex;
   align-items: center;
 
   span {
     font-size: 1rem;
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-left: 0.3rem;
+    }
   }
 
   > div {
@@ -24,6 +29,10 @@ export const Container = styled.header`
     }
 
     span.current-xp {
+      background-color: var(--green);
+      border-radius: 0.3rem;
+      color: var(--white);
+      padding: 0.3rem 0.5rem;
       position: absolute;
       top: 12px;
       transform: translateX(-50%);

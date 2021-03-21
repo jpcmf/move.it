@@ -47,7 +47,7 @@ interface ProfileProps {
 
 export const ChallengesContext = createContext({} as ChallengeContextData);
 
-export function ChallengeProvider({ children, ...rest }) {
+export function ChallengeProvider({ children, ...rest }): JSX.Element {
   console.log('rest', rest.stealing);
 
   const [dataUser] = useState(rest.user);
@@ -97,12 +97,12 @@ export function ChallengeProvider({ children, ...rest }) {
     rest.updateUser(profileData);
   }, [profileData]);
 
-  function levelUp() {
+  function levelUp(): void {
     setLevel(level + 1);
     setIsLevelUpModalOpen(true);
   }
 
-  function closeLevelUpModal() {
+  function closeLevelUpModal(): void {
     setIsLevelUpModalOpen(false);
   }
 
@@ -114,7 +114,7 @@ export function ChallengeProvider({ children, ...rest }) {
 
     new Audio('/notification.mp3').play();
 
-    const notify = () =>
+    const notify = (): string =>
       toast(`New challenge available! Earn ${challenge.amount} xp.`, {
         duration: 1000 * 10,
         style: {
@@ -145,11 +145,11 @@ export function ChallengeProvider({ children, ...rest }) {
     }
   }
 
-  function resetChallenge() {
+  function resetChallenge(): void {
     setActiveChallenge(null);
   }
 
-  function completeChallenge() {
+  function completeChallenge(): void {
     if (!activeChallenge) {
       return;
     }
