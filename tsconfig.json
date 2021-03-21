@@ -24,5 +24,8 @@
     "**/*.tsx",
     "src/pages/api/users/[id].js"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "files": [
+    "src/styles/styled.d.ts"
+  ]
 }
