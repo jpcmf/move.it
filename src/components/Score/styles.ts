@@ -64,8 +64,11 @@ export const Container = styled.ul`
     border-bottom-right-radius: 0.75rem;
     border-top-right-radius: 0.75rem;
     display: grid;
-    grid-template-columns: 7fr 4fr;
     padding: 1rem;
+
+    @media ${device.tablet} {
+      grid-template-columns: 7fr 4fr;
+    }
   }
 
   .profile {
@@ -73,17 +76,27 @@ export const Container = styled.ul`
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    margin-bottom: 1rem;
+
+    @media ${device.tablet} {
+      margin-bottom: 0;
+    }
 
     .avatar {
       border-radius: 50%;
-      height: 4rem;
+      height: 3rem;
       margin-right: 1rem;
-      width: 4rem;
+      width: 3rem;
+
+      @media ${device.tablet} {
+        height: 4rem;
+        width: 4rem;
+      }
     }
 
     strong {
       color: var(--title);
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: 600;
 
       @media ${device.tablet} {
