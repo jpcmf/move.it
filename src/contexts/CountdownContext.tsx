@@ -17,20 +17,21 @@ interface CountdownContextData {
   percentToClose: number;
 }
 
-interface CountdownProviderProps {
-  children: ReactNode;
-  user: any;
-}
+// interface CountdownProviderProps {
+//   children: ReactNode;
+//   stealing: boolean;
+// }
 
 export const CountdownContext = createContext({} as CountdownContextData);
 
 let countdownTimeout: NodeJS.Timeout;
 
-export function CountdownProvider({ children, user }: CountdownProviderProps) {
+export function CountdownProvider({ children, stealing }): JSX.Element {
+  console.log(stealing);
+
   let timer = 25;
 
-  location.host === 'localhost:3000' && (timer = 0.1);
-  user.user.email === 'jpfricks@gmail.com' && (timer = 0.1);
+  stealing && (timer = 0.1);
 
   const { startNewChallenge, resetChallenge } = useContext(ChallengesContext);
 

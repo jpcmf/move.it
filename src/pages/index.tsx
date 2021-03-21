@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useMemo } from 'react';
+import { useEffect, useCallback, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import { loadFirebase } from '../utils/firebase';
 import { Toaster } from 'react-hot-toast';
@@ -22,6 +22,7 @@ import { CompletedChallenges } from '@/components/CompletedChallenges';
 import { Countdown } from '@/components/Countdown';
 import { ChallengeBox } from '@/components/ChallengeBox';
 import { Sidebar } from '@/components/Sidebar';
+import usePersistedState from '@/utils/usePersistedState';
 
 interface UserProps {
   name: string;
@@ -38,6 +39,7 @@ interface ProfileProps {
 }
 
 export default function Home({ ...pageProps }) {
+  const [stealing, setStealing] = usePersistedState('stealing', true);
   const [session, loading] = useSession();
   const router = useRouter();
   const profiles = pageProps.pageProps.profiles;
@@ -46,8 +48,21 @@ export default function Home({ ...pageProps }) {
   const notifyEmail = () => {
     console.log('toast');
   };
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const refreshData = (): void => {
+    router.replace(router.asPath);
+    setIsRefreshing(true);
+  };
 
   useEffect(() => {
+    setIsRefreshing(false);
+  }, [profiles]);
+
+  useEffect(() => {
+    pageProps.router.query.stealing === 'true'
+      ? setStealing(true)
+      : setStealing(false);
     if (!(session || loading)) {
       router.push('/login');
     } else {
@@ -149,7 +164,7 @@ export default function Home({ ...pageProps }) {
               <ExperienceBar />
 
               {/* provider */}
-              <CountdownProvider user={loadUser}>
+              <CountdownProvider stealing={stealing}>
                 <Section>
                   <ContainerLeft>
                     <Profile data={loadUser} />

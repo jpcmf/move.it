@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from '@/styles/device';
 
 export const Container = styled.div<{ isActive: boolean }>`
   .clock {
@@ -18,6 +19,11 @@ export const Container = styled.div<{ isActive: boolean }>`
       font-size: 8.5rem;
       justify-content: space-evenly;
       text-align: center;
+      min-width: 12.5rem;
+
+      @media ${device.mobileL} {
+        min-width: auto;
+      }
 
       span {
         flex: 1;

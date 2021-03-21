@@ -27,7 +27,7 @@ export const Section = styled.section`
   grid-template-columns: repeat(1fr);
   padding: 3.5rem 0;
 
-  @media ${device.tablet} {
+  @media ${device.laptop} {
     grid-template-columns: repeat(2, 1fr);
     padding: 2rem 0;
   }
