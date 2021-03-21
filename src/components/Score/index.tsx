@@ -1,8 +1,7 @@
 import { Container } from './styles';
 
-export function Score(props) {
+export function Score(props): JSX.Element {
   const usersSorted = [];
-
   const list = props.profiles;
 
   Object.keys(list)
@@ -23,7 +22,7 @@ export function Score(props) {
 
   return (
     <Container>
-      {usersSorted.map((user, idx) => {
+      {usersSorted.map((user: any, idx: number) => {
         return (
           <li key={user.key} className={idx === 0 ? 'top-user' : 'user'}>
             <div className="position">
@@ -42,6 +41,7 @@ export function Score(props) {
                   <strong>{user.user.name}</strong>
                   <span>
                     <img src="icons/level.svg" alt="icon level" />
+                    Level {user.level}
                   </span>
                 </div>
               </span>

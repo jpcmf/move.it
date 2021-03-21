@@ -49,8 +49,24 @@ export const Section = styled.section`
       font-weight: 600;
       text-transform: uppercase;
 
+      &:not(:first-child) {
+        margin-left: 1rem;
+      }
+
+      &:nth-child(n + 3) {
+        display: none;
+      }
+
       @media ${device.tablet} {
         font-size: 1rem;
+
+        &:not(:first-child) {
+          margin-left: 0;
+        }
+
+        &:nth-child(n + 3) {
+          display: block;
+        }
       }
     }
   }
