@@ -42,13 +42,8 @@ export default createGlobalStyle`
   * {
       box-sizing: border-box;
       margin: 0;
-      /* outline: 0; */
       padding: 0;
     }
-
-    /* *:focus {
-      outline: 0;
-    } */
 
     html, body, #root {
       height: 100%;
@@ -102,7 +97,5 @@ export default createGlobalStyle`
       transform: rotate(1turn);
       transform: scale(1.2);
     }
-}
-
-
+  }
 `;

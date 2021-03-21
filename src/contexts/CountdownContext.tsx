@@ -1,10 +1,4 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { ChallengesContext } from './ChallengesContext';
 
 interface CountdownContextData {
@@ -31,7 +25,7 @@ export function CountdownProvider({ children, stealing }): JSX.Element {
 
   let timer = 25;
 
-  stealing && (timer = 0.1);
+  stealing && (timer = 0.05);
 
   const { startNewChallenge, resetChallenge } = useContext(ChallengesContext);
 
@@ -45,13 +39,13 @@ export function CountdownProvider({ children, stealing }): JSX.Element {
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
 
-  function startCountdown() {
+  function startCountdown(): void {
     setIsActive(true);
     setTime(challengeTime);
     setPercentToClose(100 - (time / challengeTime) * 100);
   }
 
-  function resetCountdown() {
+  function resetCountdown(): void {
     clearTimeout(countdownTimeout);
     resetChallenge();
     setPercentToClose(0);
@@ -67,9 +61,9 @@ export function CountdownProvider({ children, stealing }): JSX.Element {
         setPercentToClose(100 - (time / challengeTime) * 100);
       }, 1000);
     } else if (isActive && time === 0) {
+      startNewChallenge();
       setHasFinished(true);
       setIsActive(false);
-      startNewChallenge();
     }
   }, [isActive, time]);
 
