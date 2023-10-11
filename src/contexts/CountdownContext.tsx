@@ -21,8 +21,6 @@ export const CountdownContext = createContext({} as CountdownContextData);
 let countdownTimeout: NodeJS.Timeout;
 
 export function CountdownProvider({ children, stealing }): JSX.Element {
-  console.log(stealing);
-
   let timer = 25;
 
   stealing && (timer = 0.05);
