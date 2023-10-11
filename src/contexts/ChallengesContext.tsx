@@ -48,8 +48,6 @@ interface ProfileProps {
 export const ChallengesContext = createContext({} as ChallengeContextData);
 
 export function ChallengeProvider({ children, ...rest }): JSX.Element {
-  console.log('rest', rest.stealing);
-
   const [dataUser] = useState(rest.user);
   const [level, setLevel] = useState(dataUser.level);
   const [challengesCompleted, setChallengesCompleted] = useState(
